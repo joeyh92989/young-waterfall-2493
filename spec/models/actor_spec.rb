@@ -25,6 +25,11 @@ RSpec.describe Actor do
 
     it 'can order actors by age' do
     
-    expect(Actor.order_age).to eq([@actor_1, @actor_3,@actor_2])
-  end
+      expect(Actor.order_age).to eq([@actor_1, @actor_3,@actor_2])
+    end
+
+    # it 'can return actors currenty working' do
+    #   binding.pry
+    #   expect(Actor.working).to eq([@actor_1])
+    # end
 end

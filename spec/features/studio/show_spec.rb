@@ -35,7 +35,6 @@ RSpec.describe 'studio show page' do
 
     expect(page).to have_content(@studio_1.name)
     expect(page).to have_content(@studio_1.location)
-    save_and_open_page
     within "#movie-#{@movie_1.id}" do
       expect(page).to have_content(@movie_1.title)
     end
@@ -66,5 +65,6 @@ RSpec.describe 'studio show page' do
     expect(@actor_1.name).to appear_before(@actor_2.name)
   end
   it 'lists all the actors currently working ' do
+
   end
 end
