@@ -9,3 +9,11 @@
 		<p><%=movie.title %> </p>
 	</section>
 <%end%>
+
+<h2>Studio Actors</h2>
+
+<% @actors.uniq.each do |actor| %>
+	<section id = "actor-<%=actor.id%>">
+		<p><%=actor.name %> </p>
+	</section>
+<%end%>

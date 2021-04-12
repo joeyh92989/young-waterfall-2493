@@ -47,6 +47,6 @@ RSpec.describe 'movie show page' do
       within "#actor-#{@actor_3.id}" do
         expect(page).to have_content(@actor_3.name)
       end
-      save_and_open_page
+
   end
 end
