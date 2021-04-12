@@ -10,6 +10,7 @@ RSpec.describe 'movie show page' do
     )
     @actor_1= Actor.create!(name: "Harrison", age: 55, currently_working: true)
     @actor_2= Actor.create!(name: "Ford", age: 38, currently_working: false)
+    @actor_3 =Actor.create!(name: "Luke", age: 45, currently_working: false)
     ActorMovie.create!(actor: @actor_1, movie: @movie_1)
     ActorMovie.create!(actor: @actor_2, movie: @movie_1)
 
@@ -29,6 +30,23 @@ RSpec.describe 'movie show page' do
     within "#actor-#{@actor_2.id}" do
       expect(page).to have_content(@actor_2.name)
     end
+  end 
+    it 'only shows actors in the movie' do
+      visit  "/movies/#{@movie_1.id}"
 
+      expect(page).to_not have_content(@actor_3.name)
+    end
+    it 'can add an actor' do
+
+      visit "/movies/#{@movie_1.id}"
+      
+      expect(page).to have_content("Add Actor")
+      fill_in 'name', with: "#{@actor_3.name}"
+      click_on("Add")
+
+      within "#actor-#{@actor_3.id}" do
+        expect(page).to have_content(@actor_3.name)
+      end
+      save_and_open_page
   end
 end

@@ -3,8 +3,16 @@
 <h2><%= @movie.genre%></h2>
 
 
-<h2>Studio's Movies</h2>
+<h2>Actors</h2>
 
+<h3>Add Actor</h3>
+<%= form_with url: "/actormovies/#{@movie.id}/create", method: :post,  local: true do |f| %>
+	<%= f.label :actor_name %>
+  <%= f.text_field :name %>
+  <%= f.submit "Add"%>
+  <% end %>
+
+	<h3>Actors in movie</h3>
 <% @movie.actors.each do |actor| %>
 	<section id = "actor-<%=actor.id%>">
 		<p><%=actor.name %> </p>
