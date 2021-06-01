@@ -9,12 +9,13 @@ RSpec.describe 'The show page for a movie,' do
     @actor_1 = FactoryBot.create(:actor)
     @actor_2 = FactoryBot.create(:actor)
     @actor_3 = FactoryBot.create(:actor)
+    @actor_4 = FactoryBot.create(:actor)
 
     @movie.actors << @actor_1 << @actor_2 << @actor_3
   end
 
   before :each do
-    visit studio_movie_path(@studio, @movie)
+    visit movie_path(@movie)
   end
 
   it 'shows the title, creation year, and genre' do
@@ -34,8 +35,30 @@ RSpec.describe 'The show page for a movie,' do
   end
 
   describe 'adding actor form,' do
-    it 'redirects to the movie show page with the actor that exists in database is added'
+    it 'redirects to the movie show page with the actor that exists in database is added' do
+      within '#add-actor-form' do
+        fill_in 'actor_name', with: @actor_4.name
+        click_button 'Submit'
+      end
 
-    it 'redirects to the movie show page without the actor added if actor does not exist'
+      current_path.should eq movie_path(@movie)
+
+      within '#actors-list' do
+        expect(page).to have_content(@actor_4.name)
+      end
+    end
+
+    it 'redirects to the movie show page without the actor added if actor does not exist' do
+      within '#add-actor-form' do
+        fill_in 'actor_name', with: 'Bobby Jones Smith'
+        click_button 'Submit'
+      end
+
+      current_path.should eq movie_path(@movie)
+
+      within '#actors-list' do
+        expect(page).to_not have_content('Bobby Jones Smith')
+      end
+    end
   end
 end
