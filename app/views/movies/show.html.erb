@@ -1,0 +1,14 @@
+<h3><%= @movie.title %></h3>
+<p><%= @movie.creation_year %></p>
+<p><%= @movie.genre %></p>
+
+<%= form_with(url: "/movies/#{@movie.id}", method: :get, local: true) do |form| %>
+  <%= form.label "Add Actor by Name:" %>
+  <%= form.text_field :actor_name %>
+  <%= form.submit value: "Find" %>
+<% end %>
+
+<% @actors.each do |actor| %>
+  <p><%= actor.name %></p>
+  <%= link_to("Add", "/movies/#{@movie.id}/#{actor.id}", method: :get) %>
+<% end %>
