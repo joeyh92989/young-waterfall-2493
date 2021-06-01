@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :studios, only: [ :show ] do
+    resources :movies, only: [ :show ]
+  end
+
+  resources :movies, only: [ :show ]
+
+  post '/movies/:id/actors', to: 'movies#add_actor'
 end
