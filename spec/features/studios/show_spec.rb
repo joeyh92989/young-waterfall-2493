@@ -50,10 +50,10 @@ RSpec.describe 'The show page for a studio,' do
         expect(@actor_4.name).to appear_before(@actor_3.name, only_text: true)
       end
     end
-    
+
     it 'only shows currently working actors' do
       within '#actors-list' do
-        expect(page).not_to have_content(@actor_1.name)
+        expect(page).to_not have_content(@actor_1.name)
       end
     end
   end
