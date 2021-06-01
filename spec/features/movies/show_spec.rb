@@ -32,4 +32,10 @@ RSpec.describe 'The show page for a movie,' do
       end
     end
   end
+
+  describe 'adding actor form,' do
+    it 'redirects to the movie show page with the actor that exists in database is added'
+
+    it 'redirects to the movie show page without the actor added if actor does not exist'
+  end
 end
