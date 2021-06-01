@@ -8,9 +8,9 @@ RSpec.describe 'The show page for a studio,' do
     @movie_3 = FactoryBot.create(:movie, studio: @studio)
 
     @actor_1 = FactoryBot.create(:actor, currently_working: false)
-    @actor_2 = FactoryBot.create(:actor)
-    @actor_3 = FactoryBot.create(:actor)
-    @actor_4 = FactoryBot.create(:actor)
+    @actor_2 = FactoryBot.create(:actor, age: 18)
+    @actor_3 = FactoryBot.create(:actor, age: 22)
+    @actor_4 = FactoryBot.create(:actor, age: 37)
 
     @movie_1.actors << @actor_1 << @actor_2
     @movie_2.actors << @actor_2 << @actor_3 << @actor_4
@@ -37,8 +37,24 @@ RSpec.describe 'The show page for a studio,' do
   end
 
   describe 'list of actors,' do
-    it 'shows no duplicates'
-    it 'are ordered by age oldest to youngest'
-    it 'only shows currently working actors'
+    it 'shows no duplicates' do
+      within '#actors-list' do
+        expect(page).to have_content(@actor_2.name, count: 1)
+        expect(page).to have_content(@actor_3.name, count: 1)
+        expect(page).to have_content(@actor_4.name, count: 1)
+      end
+    end
+
+    it 'are ordered by age oldest to youngest' do
+      within '#actors-list' do
+        expect(@actor_4.name).to appear_before(@actor_3.name, only_text: true)
+      end
+    end
+    
+    it 'only shows currently working actors' do
+      within '#actors-list' do
+        expect(page).not_to have_content(@actor_1.name)
+      end
+    end
   end
 end
