@@ -9,7 +9,7 @@ RSpec.describe 'The show page for a studio,' do
   end
 
   before :each do
-    visit "/studios/#{@studio.id}"
+    visit studio_path(@studio)
   end
 
   it 'shows the studio name and location' do
