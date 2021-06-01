@@ -9,4 +9,10 @@ FactoryBot.define do
     name { Faker::Company.name }
     location  {Faker::Address.city }
   end
+
+  factory :actor do
+    name { Faker::Name.name }
+    age { rand(18..50) }
+    currently_working { true }
+  end
 end
