@@ -9,3 +9,9 @@
     <p><%= movie.title%> </p>
   <% end %>
 </div>
+<h3>Actors Played in Movies</h3>
+<div id='actors-list'>
+  <% Actor.actors_in_movies_for_studio(@studio).each do |actor| %>
+    <p> <%= actor.name %> </p>
+  <% end %>
+</div>
