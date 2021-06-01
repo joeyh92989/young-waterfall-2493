@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only %i[ show ]
+  before_action :set_movie, only: %i[ show ]
 
   def show
   end
